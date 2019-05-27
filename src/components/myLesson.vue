@@ -2,7 +2,7 @@
     <div class="myLesson bgmain mianScroll">
         <router-view></router-view>
         <!-- <data-top></data-top> -->
-        <top-search :searchData="searchData" v-on:searchBack="searchCall" :pageType="pageName"></top-search>
+        <top-search :searchData="searchData" v-on:searchBack="searchCall" v-bind:rolename="$store.state.userRole" :pageType="pageName"></top-search>
         <div class="rightLayer" :class="{laeryleft:$store.state.rightLayerEstate}">
             <!-- 右侧弹层筛选内容 -->
             <right-screen :thePage="thePage" v-on:headCallBack="headCall" style="z-index:10;"></right-screen>
@@ -311,6 +311,7 @@ export default {
             let mySource = that.getQueryString("source");
             let myuId = that.getQueryString("uId");
             let mytoken = that.getQueryString("token");
+            console.log(mySource + '、'+ myuId + '、'+ mytoken + '、');
             let dataList = new Object();
             if (!that.$isNull(mySource)) {
                 dataList.source = mySource;

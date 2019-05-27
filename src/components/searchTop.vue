@@ -17,7 +17,7 @@
                 <!-- <router-link active-class="on" to="/orientation">课程定位</router-link> -->
                 <router-link active-class="on" to="/shareSchool">学校共享</router-link>
                 <router-link active-class="on" to="/shareCounty">区县共享</router-link>
-                <router-link v-if="userRole<4" active-class="on" to="/myCollect">我的收藏</router-link>
+                <router-link v-if="rolename < 4" active-class="on" to="/myCollect">我的收藏</router-link>
             </div>
         </div>
     </div>
@@ -26,7 +26,8 @@
 <script>
 export default {
     name: "searchTop",
-    props: ["pageType"], //接收父页面传来的数据
+    props: ["pageType","rolename"], //接收父页面传来的数据
+
     data() {
         return {
             inputnr: "",

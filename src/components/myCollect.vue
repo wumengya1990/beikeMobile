@@ -1,7 +1,7 @@
 <template>
     <div class="myCollect bgmain mianScroll">
         <!-- <top></top> -->
-        <top-search :searchData="searchData" v-on:searchBack="searchCall" v-bind:pageType="pageType"></top-search>
+        <top-search :searchData="searchData" v-on:searchBack="searchCall" v-bind:rolename="$store.state.userRole" v-bind:pageType="pageType"></top-search>
         <div class="rightLayer" :class="{laeryleft:$store.state.rightLayerEstate}">
             <!-- 右侧弹层筛选内容 -->
             <right-screen :thePage="thePage" v-on:headCallBack="headCall" style="z-index:10;"></right-screen>

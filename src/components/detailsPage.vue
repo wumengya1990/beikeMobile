@@ -176,7 +176,7 @@
                                     </h5>
 
                                     <div class="star">
-                                        <el-rate v-model="pinglun.forumStar" disabled text-color="#ff9900"></el-rate>
+                                        <el-rate v-model="pinglun.forumStar/100" disabled text-color="#ff9900"></el-rate>
                                     </div>
                                     <div class="nrCon">
                                         <p>{{pinglun.forumContent}}</p>
@@ -211,6 +211,7 @@ export default {
     name: "detailsPage",
     data() {
         return {
+            cccc:'3',
             Imgtype: require("./../assets/images/imgTyle.png"),
             wordtype: require("./../assets/images/wordTyle.png"),
             exceltype: require("./../assets/images/excel.png"),
@@ -264,6 +265,7 @@ export default {
             let param = { planid: pId };
             that.$api.get(url, param, res => {
                 console.log("成功加载备课详情");
+                console.log(res);
                 vd.clear();
                 let imgIdx = 0;
                 let pcUrl = that.$store.state.apiUrl;
@@ -297,7 +299,9 @@ export default {
             let param = { planid: pId };
             that.$api.get(url, param, res => {
                 that.planForum = res;
+                console.log(that.planForum);
             });
+            
         },
         gethref(f, ptype) {
             let the = this;
@@ -348,7 +352,8 @@ export default {
         subComment: function() {
             let that = this;
             let errMsg = "";
-            if (that.writeLeaveMessage == "") {
+             if (that.leaveMessageCpntent.ForumContent == "") {
+            // if (that.writeLeaveMessage == "") {
                 errMsg += "请填写教案评论内容";
             }
             if (errMsg != "") {
@@ -365,12 +370,19 @@ export default {
             let url = "/api/Plan/ForumPlan";
             that.leaveMessageCpntent.planId = that.$route.query.planId;
             that.$api.post(url, that.leaveMessageCpntent, data => {
+                console.log(data);
+                if(data){
+                    that.leaveMessageCpntent.ForumContent="";
+                    that.leaveMessageCpntent.ForumStar = 0;
+                    that.$vnotify("评论成功");
+                }
                 vd.clear();
                 that.loadLeaveMessage();
-                //console.log(data.msg);
+                // console.log(data.msg);
                 that.$vnotify(data.msg);
             });
-            that.writeLeaveMessage="";
+            // that.writeLeaveMessage="";
+            
         },
         dropMyLeaveMessage(leaveIndex,leaveID){                //删除内容
             let that = this;

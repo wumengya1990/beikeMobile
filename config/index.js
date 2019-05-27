@@ -12,8 +12,8 @@ module.exports = {
     proxyTable: {
       '/beike': {
         
-        //target: 'http://192.168.0.112/hlbebk/',
-        target: 'http://192.168.0.112:8086',
+        // target: 'http://192.168.0.112:8086',
+        target: 'http://121.42.61.166:8086',
         // target: 'https://192.168.0.113:8080/',
         secure: false,
         changeOrigin: true,
@@ -23,7 +23,7 @@ module.exports = {
       }
     },
     // Various Dev Server settings
-    host: '192.168.0.147', // can be overwritten by process.env.HOST
+    host: '192.168.0.153', // can be overwritten by process.env.HOST
     port: 8000, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: true,
     errorOverlay: true,

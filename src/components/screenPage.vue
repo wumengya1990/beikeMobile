@@ -134,6 +134,7 @@ export default {
             let url = "/api/Plan/GetTermList";
             that.$api.get(url, null, res => {
                 console.log("学期加载成功");
+                console.log(res);
                 that.TermList = res.terms;
                 // that.selTerm = res.curTerm;
                 // if (that.thePage == 1) {
@@ -157,6 +158,7 @@ export default {
             let url = "/api/Plan/GetStageList";
             that.$api.get(url, null, res => {
                 console.log("学段加载成功");
+                console.log(res);
                 that.StageList = res;
             });
         },

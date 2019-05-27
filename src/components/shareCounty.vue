@@ -1,7 +1,7 @@
 <template>
     <div class="shareSchool mianScroll bgmain">
         <!-- <top></top> -->
-        <top-search :searchData="searchData" v-on:searchBack="searchCall" v-bind:pageType="pageType"></top-search>
+        <top-search :searchData="searchData" v-on:searchBack="searchCall" v-bind:rolename="$store.state.userRole" v-bind:pageType="pageType"></top-search>
         <div class="rightLayer" :class="{laeryleft:$store.state.rightLayerEstate}">
             <!-- 右侧弹层筛选内容 -->
             <right-screen :chaundishuju="chaundishuju" v-on:headCallBack="headCall" style="z-index:10;"></right-screen>
@@ -54,7 +54,7 @@
                             <a v-if="course.hasPlanThink" @click="watchReflect(course.planId,index)">
                                 <i class="el-icon-view"></i>查看反思
                             </a>
-                            <span>
+                            <span v-else>
                                 <i class="el-icon-view"></i>暂无反思
                             </span>
                             
@@ -201,6 +201,7 @@ export default {
                 }
             }
             that.$api.get(url, param, res => {
+                // console.log(res);
                 let resCount = res.length;
                 console.log("成功加载区县分享:" + resCount);
                 if (isInit == true) {

@@ -4,7 +4,6 @@
         <router-link v-else to="myLesson">进入我的备课</router-link>
     </div>
 </template>
-
 <script>
 export default {
     name:'firstPage',

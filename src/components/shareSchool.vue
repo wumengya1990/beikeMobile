@@ -1,7 +1,7 @@
 <template>
     <div class="shareSchool mianScroll bgmain">
         <!-- <top></top> -->
-        <top-search :searchData="searchData" v-on:searchBack="searchCall" v-bind:pageType="pageName"></top-search>
+        <top-search :searchData="searchData" v-on:searchBack="searchCall" v-bind:rolename="$store.state.userRole" v-bind:pageType="pageName"></top-search>
         <div class="rightLayer" :class="{laeryleft:$store.state.rightLayerEstate}">
             <!-- 右侧弹层筛选内容 -->
             <right-screen :thePage="thePage" v-on:headCallBack="headCall" style="z-index:10;"></right-screen>
@@ -52,9 +52,15 @@
                         </p>
                         <div class="operate">
                             
-                            <a @click="watchReflect(course.planId,index)">
+                            
+                            <span v-if="course.planThink==''||course.planThink==null|| course.planThink == undefined">
+                                <i class="el-icon-view"></i>暂无反思
+                            </span>
+                            <a v-else @click="watchReflect(course.planId,index)">
                                 <i class="el-icon-view"></i>查看反思
                             </a>
+
+
 
                             <span>
                                 <i class="el-icon-download"></i>
@@ -72,7 +78,7 @@
                         <div class="checkBox">
                             <!-- <el-checkbox :checked="course.flagSchool == 1" @change="schoolshare(course.planId,index)">校共享</el-checkbox> -->
                             <el-checkbox v-model="course.isCountyShare" @click.native.prevent="areaShare(course.planId,index)">区共享</el-checkbox>
-                            <el-checkbox v-model="course.isFavor" @click.native.prevent="mycollect(course.planId,index)">收藏</el-checkbox>
+                            <!-- <el-checkbox v-model="course.isFavor" @click.native.prevent="mycollect(course.planId,index)">收藏</el-checkbox> -->
                         </div>
                     </div>
                     <div class="clear"></div>
@@ -251,22 +257,22 @@ export default {
             });
         },
         //收藏教案
-        mycollect: function(pid, rowIdx) {
-            let that = this;
-            let shareState = that.myPlanList[rowIdx].isFavor;
-            if (shareState == true) {
-                that.$vnotify("已经收藏过该教案");
-                return;
-            }
-            const vd = that.$vloading("正在收藏...");
-            let url = "/api/Plan/CollectionPlan";
-            let param = { planId: pid };
-            that.$api.get(url, param, res => {
-                that.myPlanList[rowIdx].isFavor = true;
-                vd.clear();
-                that.$vnotify("收藏成功");
-            });
-        },
+        // mycollect: function(pid, rowIdx) {
+        //     let that = this;
+        //     let shareState = that.myPlanList[rowIdx].isFavor;
+        //     if (shareState == true) {
+        //         that.$vnotify("已经收藏过该教案");
+        //         return;
+        //     }
+        //     const vd = that.$vloading("正在收藏...");
+        //     let url = "/api/Plan/CollectionPlan";
+        //     let param = { planId: pid };
+        //     that.$api.get(url, param, res => {
+        //         that.myPlanList[rowIdx].isFavor = true;
+        //         vd.clear();
+        //         that.$vnotify("收藏成功");
+        //     });
+        // },
         //查看教学反思
         watchReflect: function(pid) {
             this.tcshow2 = !this.tcshow2;
