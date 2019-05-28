@@ -10,6 +10,7 @@ import searchTop from '@/components/searchTop'
 import myLesson from '@/components/myLesson'
 import detailsPage from '@/components/detailsPage'
 import myCollect from '@/components/myCollect'
+import collectDetailsPage from '@/components/collectDetailsPage'
 import shareSchool from '@/components/shareSchool'
 import shareCounty from '@/components/shareCounty'
 import newCourse from '@/components/newCourse'
@@ -88,7 +89,13 @@ const router = new Router({
       Authorize: true, // 添加该字段，表示进入这个路由是需要登录的
       userRole: 3
     }
-  }, {
+  },
+  {
+    path: '/collectDetailsPage',
+    name: 'collectDetailsPage',
+    component: collectDetailsPage
+  },
+  {
     path: '/shareSchool',
     name: 'shareSchool',
     component: shareSchool,

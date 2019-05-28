@@ -144,7 +144,7 @@ export default {
         //跳转到详情页面
         planDetail: function(planId) {
             this.$router.push({
-                path: "/detailsPage",
+                path: "collectDetailsPage",
                 query: { planId: planId }
             });
         },
